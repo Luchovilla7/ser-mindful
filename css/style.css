@@ -1,0 +1,82 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url(../img/bg.webp);
+  background-position: center;
+  background-size: cover;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.audio-player {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+.audio-player h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #444;
+}
+.audio-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.audio-controls button {
+  background: #6c63ff;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+  width: 40px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.audio-controls button:hover {
+  background: #574dcf;
+}
+.progress-container {
+  position: relative;
+  flex: 1;
+  margin: 0 10px;
+}
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.progress {
+  height: 100%;
+  width: 0;
+  background: #6c63ff;
+}
+.time {
+  font-size: 0.8rem;
+  color: #666;
+}
+audio {
+  display: none;
+}
+
+.logo {
+  position: fixed; /* Fija el elemento */
+  bottom: 0; /* Lo coloca al fondo de la ventana */
+  left: 0; /* Alineado al borde izquierdo */
+  width: 100%; /* Ocupa todo el ancho */
+  text-align: center; /* Centra el contenido dentro del div */
+  padding: 10px; /* Espaciado interno */
+}
+.logo img {
+  max-width: 100px; /* Tamaño del logo (ajústalo según sea necesario) */
+}
