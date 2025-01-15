@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Reproductor de Meditaciones</title>
+  </head>
+  <body>
+    <div class="audio-player">
+      <h2>Día 9: Cultivando la autocompación</h2>
+      <audio id="audio" src="audio/dia9.MP3"></audio>
+      <div class="audio-controls">
+        <button id="play-pause">▶</button>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress"></div>
+          </div>
+        </div>
+        <span class="time" id="current-time">0:00</span>
+        <span class="time">/</span>
+        <span class="time" id="duration">0:00</span>
+      </div>
+    </div>
+    <div class="logo">
+      <img src="img/logo-2.png" alt="logo luciano villalba">
+    </div>
+    <script>
+      const audio = document.getElementById("audio");
+      const playPauseBtn = document.getElementById("play-pause");
+      const progressBar = document.querySelector(".progress-bar");
+      const progress = document.querySelector(".progress");
+      const currentTimeEl = document.getElementById("current-time");
+      const durationEl = document.getElementById("duration");
+
+      // Format time in minutes:seconds
+      const formatTime = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60)
+          .toString()
+          .padStart(2, "0");
+        return `${minutes}:${seconds}`;
+      };
+
+      // Play/Pause functionality
+      playPauseBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          playPauseBtn.textContent = "⏸";
+        } else {
+          audio.pause();
+          playPauseBtn.textContent = "▶";
+        }
+      });
+
+      // Update progress bar and time
+      audio.addEventListener("timeupdate", () => {
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        progress.style.width = `${progressPercent}%`;
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+      });
+
+      // Set duration when metadata is loaded
+      audio.addEventListener("loadedmetadata", () => {
+        durationEl.textContent = formatTime(audio.duration);
+      });
+
+      // Seek functionality
+      progressBar.addEventListener("click", (e) => {
+        const width = progressBar.offsetWidth;
+        const clickX = e.offsetX;
+        const duration = audio.duration;
+        audio.currentTime = (clickX / width) * duration;
+      });
+
+      // Disable downloading via right-click
+      document.addEventListener("contextmenu", (e) => {
+        if (e.target === audio) {
+          e.preventDefault();
+        }
+      });
+    </script>
+  </body>
+</html>
